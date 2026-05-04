@@ -17,5 +17,4 @@
 pip install -r requirements.txt
 python app.py
 
-## Live Demo
-(Add your Render link here)
+
