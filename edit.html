@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="card p-4 shadow">
+    <h3>Edit Contact</h3>
+
+    <form method="POST">
+        <input class="form-control mb-3" name="name" value="{{contact['name']}}">
+        <input class="form-control mb-3" name="phone" value="{{contact['phone']}}">
+        <input class="form-control mb-3" name="email" value="{{contact['email']}}">
+
+        <button class="btn btn-primary">Update Contact</button>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,2 +1,12 @@
-# contact-manager-flask
-A full-stack Contact Manager web app built with Flask, featuring authentication, REST API, live search, and modern UI.
+# Contact Manager Web App
+
+## Features
+- Add, Edit, Delete Contacts
+- SQLite Database
+- Flask Web Framework
+
+## Run Project
+pip install flask
+python app.py
+
+Open http://127.0.0.1:5000/

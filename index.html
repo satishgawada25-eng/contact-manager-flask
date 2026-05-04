@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- DASHBOARD CARDS -->
+<div class="row mb-4">
+
+    <div class="col-md-4">
+        <div class="card shadow p-3 text-center">
+            <i class="bi bi-people fs-1 text-primary"></i>
+            <h5>Total Contacts</h5>
+            <h2>{{ contacts|length }}</h2>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow p-3 text-center">
+            <i class="bi bi-telephone fs-1 text-success"></i>
+            <h5>Saved Numbers</h5>
+            <h2>{{ contacts|length }}</h2>
+        </div>
+    </div>
+
+</div>
+
+<!-- MAIN TABLE CARD -->
+<div class="card shadow p-4">
+
+    <div class="d-flex justify-content-between mb-3">
+
+        <!-- LIVE SEARCH -->
+        <input id="search" class="form-control me-2 w-50" placeholder="🔍 Search contacts">
+
+        <a href="/add" class="btn btn-success">
+            <i class="bi bi-plus"></i> Add
+        </a>
+
+    </div>
+
+    <!-- TABLE -->
+    <table class="table table-hover align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th><i class="bi bi-person"></i> Name</th>
+                <th><i class="bi bi-phone"></i> Phone</th>
+                <th><i class="bi bi-envelope"></i> Email</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody id="tableBody">
+        {% for c in contacts %}
+        <tr>
+            <td><strong>{{c['name']}}</strong></td>
+            <td>{{c['phone']}}</td>
+            <td>{{c['email']}}</td>
+            <td class="text-center">
+
+                <!-- CALL -->
+                <a href="tel:{{c['phone']}}" class="btn btn-success btn-sm">
+                    <i class="bi bi-telephone"></i>
+                </a>
+
+                <!-- EMAIL -->
+                <a href="mailto:{{c['email']}}?subject=Hello {{c['name']}}" 
+                   class="btn btn-info btn-sm">
+                    <i class="bi bi-envelope"></i>
+                </a>
+
+                <!-- EDIT -->
+                <a href="/edit/{{c['id']}}" class="btn btn-warning btn-sm">
+                    <i class="bi bi-pencil"></i>
+                </a>
+
+                <!-- DELETE -->
+                <a href="/delete/{{c['id']}}" 
+                   onclick="return confirm('Delete this contact?')" 
+                   class="btn btn-danger btn-sm">
+                    <i class="bi bi-trash"></i>
+                </a>
+
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+
+    <!-- EMPTY STATE -->
+    {% if not contacts %}
+    <div class="text-center mt-4">
+        <h5>No contacts found 😔</h5>
+    </div>
+    {% endif %}
+
+</div>
+
+<!-- LIVE SEARCH SCRIPT -->
+<script>
+document.getElementById("search").addEventListener("keyup", function () {
+    let value = this.value.toLowerCase();
+    let rows = document.querySelectorAll("#tableBody tr");
+
+    rows.forEach(row => {
+        row.style.display = row.innerText.toLowerCase().includes(value) ? "" : "none";
+    });
+});
+</script>
+
+<!-- HOVER STYLE -->
+<style>
+table tr:hover {
+    background-color: #f5f5f5;
+}
+</style>
+
+{% endblock %}

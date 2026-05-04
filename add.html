@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="card p-4 shadow">
+    <h3>Add Contact</h3>
+
+    <form method="POST">
+        <input class="form-control mb-3" name="name" placeholder="Full Name">
+        <input class="form-control mb-3" name="phone" placeholder="Phone Number">
+        <input class="form-control mb-3" name="email" placeholder="Email Address">
+
+        <button class="btn btn-success">Save Contact</button>
+    </form>
+</div>
+
+{% endblock %}
